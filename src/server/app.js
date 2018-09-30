@@ -19,7 +19,7 @@ app.use(logger);
 app.use(express.static(path.join(__dirname, '/../../dist')));
 app.use(express.static(path.join(__dirname, '../client/public')));
 
-app.get('/api/movie/:movieId', (req, res) => {
+app.get('/middle/api/movie/:movieId', (req, res) => {
   // res.send('send back movie page');
   console.log(req.params);
   const { movieId } = req.params;
@@ -33,7 +33,7 @@ app.get('/api/movie/:movieId', (req, res) => {
 });
 
 // post route for section edits
-app.post('/api/movie/:movieId', (req, res) => {
+app.post('/middle/api/movie/:movieId', (req, res) => {
   const { movieId } = req.params;
   const { section, text } = req.body;
 
@@ -46,7 +46,7 @@ app.post('/api/movie/:movieId', (req, res) => {
     });
 });
 
-app.get('/api/review/:reviewId', (req, res) => {
+app.get('/middle/api/review/:reviewId', (req, res) => {
   const { reviewId } = req.params;
 
   models.getMovieReview(reviewId)
