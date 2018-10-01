@@ -32,9 +32,9 @@ function writeTen(writer, data, encoding, callback) {
 
       for(let key in data) {
         if(key === 'photos') {
-          obj = obj + JSON.stringify(data[key]) + '\n';
+          obj = obj + data[key] + '\n';
         }else {
-          obj = obj + JSON.stringify(data[key]) + '\t';
+          obj = obj + data[key] + '\t';
         }
       }
       // data = JSON.stringify(data);

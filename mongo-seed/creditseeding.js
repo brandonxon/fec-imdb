@@ -4,7 +4,7 @@ const Faker = require('faker/locale/en_US');
 const timer = require('performance-now');
 
 
-let dataDir = path.resolve(__dirname, `credits.csv`);
+let dataDir = path.resolve(__dirname, `../data/creditsdata.tsv`);
 
 //tsv
 
@@ -29,9 +29,9 @@ function writeTen(writer, data, encoding, callback) {
 
       for(let key in data) {
         if(key === 'color') {
-          obj = obj + JSON.stringify(data[key]) + '\n';
+          obj = obj + data[key] + '\n';
         }else {
-          obj = obj + JSON.stringify(data[key]) + '\t';
+          obj = obj + data[key] + '\t';
         }
       }
       // data = JSON.stringify(data);
