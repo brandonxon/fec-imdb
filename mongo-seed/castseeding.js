@@ -9,23 +9,40 @@ let dataDir = path.resolve(__dirname, `../data/castData.tsv`);
 const start  = timer();
 function writeTen(writer, data, encoding, callback) {
   let i = 10000001;
+  //10000001
   write();
   function write() {
     let ok = true;
     do {
       i--;
       let obj = '';
-      let cast = [], photos = [];
+      let cast = '[', photos = [];
+      let words = 'abcdefghijklmnopqrstuvwxyz'.split('');
+      let word = '';
+
+      for (let k = 0; k < 8; k++) {
+        let index = Math.floor(Math.random() * 26);
+        word += words[index];
+      }
+
       for (let j = 0; j < 15; j++) {
-        name = Faker.name.findName();
-        pic = Faker.image.avatar().slice(47);
-        cast.push(name);
+        let name = Faker.name.findName();
+        let character = Faker.internet.userName();
+        let ran = Math.floor(Math.random()* 85) + 15;
+        let charPic = Faker.image.avatar().slice(47);
+        let pic = ran - j;
+        cast += `{"name":"${name}","character":"${character}", "url":"${charPic}"}`;
         photos.push(pic);
+        if (j !== 14) {
+          cast += ',';
+        }else {
+          cast += ']';
+        }
       }   
 
       data = {
         id: i,
-        title: Faker.lorem.sentence(),
+        title: Faker.random.words() + ',' + word,
         cast: cast,
         photos: photos
       }
@@ -33,6 +50,8 @@ function writeTen(writer, data, encoding, callback) {
       for(let key in data) {
         if(key === 'photos') {
           obj = obj + data[key] + '\n';
+        }else if(key === 'cast'){
+          obj = obj + data[key] + '\t';
         }else {
           obj = obj + data[key] + '\t';
         }

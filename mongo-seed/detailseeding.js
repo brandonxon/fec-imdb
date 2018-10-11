@@ -31,6 +31,7 @@ function writeTen(writer, data, encoding, callback) {
         languages: languages,
         releaseDate: Faker.date.between('2010-01-01','2018-09-28').toString().slice(0, 15),
         aka: Faker.random.word(),
+        officialSites: officialSites,
         filminglocation: filminglocation
       }
 

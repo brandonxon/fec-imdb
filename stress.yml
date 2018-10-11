@@ -1,0 +1,28 @@
+config:
+  target: 'http://127.0.0.1:3000'
+  phases:
+    - duration: 60
+      arrivalRate: 28
+      # rampTo: 100
+  # defaults:
+    # headers:
+    #   x-my-service-auth: '987401838271002188298567'
+  # http:
+  #   # Responses have to be sent within 10 seconds or the request will be aborted
+  #   # timeout: 1200
+  #   # tls:
+  #   #   rejectUnauthorized: false
+  #   pool: 5 # All HTTP requests from all virtual users will be sent over the same 10 connections
+  # # variables:
+  # #   movieIds:
+  # #     - [1, 5000000, 2500000, 3000000, 99999, 9999999, 301, 765234, 910332, 2]
+  # #     - [1234, 5002340, 2474500, 3000, 999, 9945999, 144534, 54, 9324232, 243534]
+scenarios:
+  - flow:
+    - loop:
+            - get:
+                  url: "/middle/api/movie/{{$randomNumber(9000000,10000000)}}"
+      # over: movieIds
+            - post: 
+                  url: "/middle/api/new"
+      count: 10

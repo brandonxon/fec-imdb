@@ -11,7 +11,7 @@ const CastList = ({ cast }) => {
       <div className={ styles['cast-list-container'] }>
         {
           cast.map((castMember, index) => (
-            <CastListItem key={index} url={ castMember.url } name={ castMember.name } character={ castMember.character } />
+            <CastListItem key={index} url={ `https://s3.amazonaws.com/uifaces/faces/twitter/${castMember.url}` } name={ castMember.name } character={ castMember.character } />
           ))
         }
       </div>

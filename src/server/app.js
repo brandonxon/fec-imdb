@@ -1,3 +1,4 @@
+require('newrelic');
 require('dotenv').config();
 
 const path = require('path');
@@ -9,54 +10,45 @@ const helmet = require('helmet');
 const models = require('../db/models');
 
 const app = express();
-const logger = morgan('dev');
+// const logger = morgan('dev');
+
 
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(logger);
+// app.use(logger);
 app.use(express.static(path.join(__dirname, '/../../dist')));
 app.use(express.static(path.join(__dirname, '../client/public')));
 
 app.get('/middle/api/movie/:movieId', (req, res) => {
-  // res.send('send back movie page');
-  console.log(req.params);
   const { movieId } = req.params;
-  console.log('GOT MOVIE ID', movieId);
-  models.getMovie(movieId)
-    .then(result => {
-      console.log('success!');
-      res.send(JSON.stringify(result));
-    })
-    .catch(err => res.send(JSON.stringify(err)));
+  models.getMovie(movieId, (result) => {
+    res.send(JSON.stringify(result));
+  })
 });
 
 // post route for section edits
-app.post('/middle/api/movie/:movieId', (req, res) => {
-  const { movieId } = req.params;
-  const { section, text } = req.body;
-
-  models.editMovie(movieId, section, text)
+app.post('/middle/api/new', (req, res) => {
+  models.createMovie()
     .then(result => {
-      console.log(result);
+      res.send(JSON.stringify('write'));
     })
     .catch(err => {
-      console.log(err);
     });
 });
 
-app.get('/middle/api/review/:reviewId', (req, res) => {
-  const { reviewId } = req.params;
+// app.get('/middle/api/review/:reviewId', (req, res) => {
+//   const { reviewId } = req.params;
 
-  models.getMovieReview(reviewId)
-    .then(result => {
-      res.send(result);
-    })
-    .catch(err => {
-      console.log(err);
-      res.send(JSON.stringify(err));
-    });
-});
+//   models.getMovieReview(reviewId)
+//     .then(result => {
+//       res.send(result);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//       res.send(JSON.stringify(err));
+//     });
+// });
 
 module.exports = app;

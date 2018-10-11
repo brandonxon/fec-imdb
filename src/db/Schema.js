@@ -1,41 +1,77 @@
 const db = require('./db');
 const Schema = db.Schema;
 
-const MovieSchema = new Schema({
+const CastSchema = new Schema({
   // id: Number,
   id: {
     type: Number,
     unique: true,
   },
   title: String,
-  cast: Array,
-  photos: Array,
+  cast: String,
+  photos: String,
+});
+
   // STORY LINE
+const StorySchema = new Schema({
+  id: {
+    type: Number,
+    unique: true,
+  },
   storyline: String,
-  plotKeyWords: Array,
+  plotKeyWords: String,
+  //Array
   taglines: String,
-  genres: Array,
   movieRating: String,
   mpaa: String,
+  genres: String,
+  //Array
+});
+
   // DETAILS
-  officialSites: Array,
+const DetailSchema = new Schema({
+  id: {
+    type: Number,
+    unique: true,
+  },  
   country: String,
-  languages: Array,
+  languages: String,
+  //Array
   releaseDate: String,
   aKa: String,
-  filmingLocations: Array,
+  officialSites: String,
+  //Array
+  filmingLocations: String,
+  //Array
+});
+
   // BOX OFFICE
+const BoxoffSchema = new Schema({
+  id: {
+    type: Number,
+    unique: true,
+  }, 
   budget: String,
   openingWeekend: String,
   gross: String,
   cumulative: String,
+});
+
   // CREDITS
-  productionCo: Array,
+const CreditSchema = new Schema({
+  id: {
+    type: Number,
+    unique: true,
+  }, 
+  productionCo: String,
+  //Array
   runtime: String,
   soundMix: String,
   color: String,
-  aspectRatio: String,
-  // DID YOU KNOW
+  // aspectRatio: String,
+});
+
+const DidSchema = new Schema({
   trivia: String,
   goofs: String,
   quotes: String,
@@ -43,22 +79,13 @@ const MovieSchema = new Schema({
   connections: String,
   soundtracks: Array,
   faq: Array,
-});
-
-const MovieReviewSchema = new Schema({
-  id: { type: Number, unique: true },
-  movie_title: String,
-  reviewer: String,
-  review_title: String,
-  review: String,
-  review_date: String,
-  reviews_number: Number,
-  review_viewers: Number,
-  review_likes: Number,
-  review_average: Number
-});
+})
 
 module.exports = {
-  MovieSchema,
-  MovieReviewSchema,
+  CastSchema,
+  StorySchema,
+  DetailSchema,
+  BoxoffSchema,
+  CreditSchema,
+  DidSchema
 };
