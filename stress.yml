@@ -2,11 +2,8 @@ config:
   target: 'http://127.0.0.1:3000'
   phases:
     - duration: 60
-      arrivalRate: 28
+      arrivalRate: 25
       # rampTo: 100
-  # defaults:
-    # headers:
-    #   x-my-service-auth: '987401838271002188298567'
   # http:
   #   # Responses have to be sent within 10 seconds or the request will be aborted
   #   # timeout: 1200
@@ -25,4 +22,4 @@ scenarios:
       # over: movieIds
             - post: 
                   url: "/middle/api/new"
-      count: 10
+      count: 20
